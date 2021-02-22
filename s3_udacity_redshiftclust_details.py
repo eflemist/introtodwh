@@ -1,6 +1,4 @@
 import boto3
-import configparser
-import json
 import pandas as pd
 import s3_udacity_config as db_config
 
@@ -18,15 +16,13 @@ def prettyRedshiftProps(props):
     return pd.DataFrame(data=x, columns=["Key", "Value"])
 
 
-print(db_config.DWH_CLUSTER_IDENTIFIER)
+#print(db_config.DWH_CLUSTER_IDENTIFIER)
 myClusterProps = redshift.describe_clusters(ClusterIdentifier=db_config.DWH_CLUSTER_IDENTIFIER)
-print(myClusterProps)
-print(prettyRedshiftProps(myClusterProps))
+print('host: ',myClusterProps['Clusters'][0]['Endpoint']['Address'])
+#print(myClusterProps)
+#print(prettyRedshiftProps(myClusterProps))
 
-#ASSMP1_ENDPOINT = myClusterProps['Endpoint']['Address']
-#ASSMP1_ROLE_ARN = myClusterProps['IamRoles'][0]['IamRoleArn']
-#print("ASSMP1_ENDPOINT :: ", ASSMP1_ENDPOINT)
-#print("DASSMP1_ROLE_ARN :: ", ASSMP1_ROLE_ARN)
+
 
 
 
